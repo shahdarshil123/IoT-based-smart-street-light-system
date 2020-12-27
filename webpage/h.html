@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<a><h1 align="center">Welcome to Smart Street Light System!</h1></a>
+<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-database.js"></script>
+</head>
+<body>
+   <div id="demo">
+<h3>Click on the button below to change the state of LED</h3>
+ <button onclick= "setLED('ON')">ON</button>
+ <button onclick= "setLED('OFF')">OFF</button>
+ <br>
+</div>
+ 
+<div>
+  <h3>Check LED Status</h3>
+    LED State is : <span id="LEDState">NA</span>
+</div>
+<script >
+  var firebaseConfig = {
+    apiKey: "AIzaSyCDUT-qGZqPlAMS89ROoH_U71Se384t4KA",
+    authDomain: "strike24-3a461.firebaseapp.com",
+    databaseURL: "https://strike24-3a461.firebaseio.com",
+    projectId: "strike24-3a461",
+    storageBucket: "strike24-3a461.appspot.com",
+    messagingSenderId: "657975207081",
+    appId: "1:657975207081:web:416131637ca25a9cc1b5b8",
+    measurementId: "G-5M038HCBZX"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var h1=document.getElementById("LEDState");
+  var obj=firebase.database().ref().child('LED_STATUS');
+  obj.on('value',snap=>h1.innerText=snap.val());
+
+  function setLED(led)
+  {
+  var obj2=firebase.database().ref().child("LED_STATUS").set(led);
+};
+</script>
+</body>
+</html>
